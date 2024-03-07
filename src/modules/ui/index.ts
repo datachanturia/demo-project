@@ -1,0 +1,1 @@
+export {HomeLayout, MovieDetailsLayout} from './layouts';
