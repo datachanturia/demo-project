@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text} from 'react-native';
 import { MovieDetailsLayout } from '../../ui';
+import { MovieDetailsScreenProps } from '../../../types/navigation';
 
-const MovieDetailsScreen = () => {
+const MovieDetailsScreen = ({movieId}: MovieDetailsScreenProps) => {
   return <MovieDetailsLayout />
 };
 
