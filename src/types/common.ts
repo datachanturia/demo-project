@@ -1,3 +1,5 @@
+export type MoviePosterUrl = string | null;
+
 export type MovieListItem = {
   "#TITLE": string;
   "#YEAR": number;
@@ -6,11 +8,29 @@ export type MovieListItem = {
   "#ACTORS": string;
   "#IMDB_URL": string;
   "#IMDB_IV": string;
-  "#IMG_POSTER": string | null;
+  "#IMG_POSTER": MoviePosterUrl;
   "photo_width": number;
   "photo_height": number;
 };
 
 export type Movie = {
-  name: string;
+  imdbId: string;
+  short: {
+    name: string;
+    description: string;
+    actor: { name: string }[];
+    review?: {
+      name?: string;
+      body?: string;
+    };
+    aggregateRating?: {
+      ratingValue: number;
+      ratingCount: number;
+    };
+  };
+  top: {
+    reviews: {
+      total: number;
+    };
+  };
 };

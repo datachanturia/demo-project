@@ -1,13 +1,13 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text} from 'react-native';
-import { LayoutWrapper } from '../atoms';
-import { MovieListItem } from '../../../types';
+import { FlatList, StyleSheet} from 'react-native';
+import { LayoutWrapper, Text } from '../atoms';
+import { MovieListItem, MoviePosterUrl } from '../../../types';
 import { MovieItem, SearchBar } from '../organisms';
 
 interface Props {
   movies: MovieListItem[];
   isLoading: boolean;
-  onMovieItemPress: () => void;
+  onMovieItemPress: (movieId: string, moviePoster: MoviePosterUrl) => void;
   onSearchPress: (movieName: string) => void;
 }
 
@@ -16,7 +16,7 @@ const HomeLayout = ({movies, isLoading, onMovieItemPress, onSearchPress}:Props) 
     <Text style={styles.header}>DEMO PROJECT</Text>
   )
 
-  return <LayoutWrapper containerStyle={styles.container}>
+  return <LayoutWrapper contentContainerStyle={styles.container}>
     <FlatList
       showsVerticalScrollIndicator={false}
       data={movies}
@@ -27,13 +27,14 @@ const HomeLayout = ({movies, isLoading, onMovieItemPress, onSearchPress}:Props) 
           <SearchBar isLoading={isLoading} onSearchPress={onSearchPress} />
         </>
       }
-      renderItem={({item}) => <MovieItem item={item} onPress={onMovieItemPress} />} />
+      renderItem={({item}) => <MovieItem item={item} onPress={() => onMovieItemPress(item['#IMDB_ID'], item['#IMG_POSTER'])} />} />
   </LayoutWrapper>
 };
 
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
+    paddingHorizontal: 16,
   },
   listContentContainer: {
     paddingBottom: 40,

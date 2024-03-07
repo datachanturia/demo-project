@@ -1,14 +1,17 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {MovieListItem} from '../../types';
+import {Movie, MovieListItem} from '../../types';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({baseUrl: 'https://search.imdbot.workers.dev/'}),
   endpoints: builder => ({
-    searchMovies: builder.query<{description: MovieListItem[]}, string>({
+    getMovies: builder.query<{description: MovieListItem[]}, string>({
       query: (name) => `?q=${name}`,
+    }),
+    getMovie: builder.query<Movie, string>({
+      query: (movieId) => `?tt=${movieId}`,
     }),
   }),
 });
 
-export const {useLazySearchMoviesQuery} = apiSlice;
+export const {useLazyGetMoviesQuery, useLazyGetMovieQuery} = apiSlice;

@@ -1,6 +1,7 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import { MovieListItem } from '../../../types';
+import { Text } from '../atoms';
 
 interface Props {
   item: MovieListItem;

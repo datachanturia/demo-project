@@ -2,18 +2,22 @@ import React, { useEffect } from 'react';
 import { HomeLayout } from '../../ui';
 import { useNavigation } from '@react-navigation/native';
 import { Routes } from '../navigation/routes';
-import { useLazySearchMoviesQuery } from '../../api/apiSlice';
+import { useLazyGetMoviesQuery } from '../../api';
 import { alertError } from '../../../services';
+import { setMovieId, setMoviePoster } from '../../movie-details';
+import { useDispatch } from 'react-redux';
+import { MoviePosterUrl } from '../../../types';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [searchMovies, {data, isFetching, isError}] = useLazySearchMoviesQuery();
+  const dispatch = useDispatch();
+  const [getMovies, {data, isFetching, isError}] = useLazyGetMoviesQuery();
 
   const movies = data?.description || [];
 
   useEffect(() => {
-    searchMovies('');
-  },[])
+    getMovies('');
+  }, [])
 
   useEffect(() => {
     if(isError){
@@ -21,7 +25,9 @@ const HomeScreen = () => {
     }
   }, [isError])
   
-  const movieItemPressHandler = () => {
+  const movieItemPressHandler = (movieId: string, moviePoster: MoviePosterUrl) => {
+    dispatch(setMovieId(movieId));
+    dispatch(setMoviePoster(moviePoster))
     navigation.navigate(Routes.MOVIE_DETAILS_FLOW as never);
   }
 
@@ -29,7 +35,7 @@ const HomeScreen = () => {
     isLoading={isFetching}
     movies={movies} 
     onMovieItemPress={movieItemPressHandler} 
-    onSearchPress={searchMovies} />
+    onSearchPress={getMovies} />
 };
 
 export default HomeScreen;
