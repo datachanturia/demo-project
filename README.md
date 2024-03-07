@@ -3,8 +3,6 @@
 Just follow official React Native docs, as it is described in the latest version and all good
 Then just run yarn android / yarn ios and test
 
-# DEMO Video is Attached to root
-
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
